@@ -83,6 +83,12 @@
         msg: why isn't this a handler
       when: result | changed
 
+    - name: Conditional task that registers result
+      ansible.builtin.command: 'true'
+      when: result.changed
+      register: conditional_task_result
+      changed_when: false
+
   handlers:
     # If this task would have being under 'tasks:' it should have triggered
     # the rule, but under 'handlers:' it should not.

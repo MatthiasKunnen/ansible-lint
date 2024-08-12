@@ -72,6 +72,9 @@ class UseHandlerRatherThanWhenChangedRule(AnsibleLintRule):
         if task["__ansible_action_type__"] != "task" or task.is_handler():
             return False
 
+        if task.get("register"):
+            return False
+
         when = task.get("when")
         result = False
 
